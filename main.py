@@ -9,10 +9,30 @@ from sqlalchemy.orm import sessionmaker
 # flask app
 app = Flask(__name__)
 
-# test page
+# main page
 @app.route('/')
-def test():
-    return "<html><body>Hello there!</body></html>"
+@app.route('/stories')
+def showStories():
+    return "This page will show all user stories."
+
+
+# new story page
+@app.route('/story/new')
+def newStory():
+    return "This page will create a new story."
+
+
+# edit story page
+@app.route('/story/<int:story_id>/edit')
+def editStory(story_id):
+    return "This page will edit the story with id: " + str(story_id)
+
+
+# delete story page
+@app.route('/story/<int:story_id>/delete')
+def deleteStory(story_id):
+    return "This page will delete the story with id: " + str(story_id)
+
 
 # if main
 if __name__ == '__main__':
