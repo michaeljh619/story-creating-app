@@ -9,16 +9,30 @@ from sqlalchemy.orm import sessionmaker
 # flask app
 app = Flask(__name__)
 
-# main page
+
+# main page showing all categories
 @app.route('/')
-@app.route('/stories')
-def showStories():
-    return render_template("stories.html")
+@app.route('/categories/')
+def showCategories():
+    return render_template("categories.html")
+
+
+# show all stories under a category
+@app.route('/categories/<string:category>/')
+def showCategory(category):
+    return render_template("showCategory.html",
+                           category=category)
+
+
+# show a particular story in a category
+@app.route('/categories/<string:category>/story/<int:story_id>')
+def showStory(category, story_id):
+    return render_template("showStory.html")
 
 
 # new story page
-@app.route('/story/new')
-def newStory():
+@app.route('/categories/<string:category>/story/new')
+def newStory(cat_id):
     return render_template("newStory.html")
 
 
