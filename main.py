@@ -13,25 +13,25 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/stories')
 def showStories():
-    return "This page will show all user stories."
+    return render_template("stories.html")
 
 
 # new story page
 @app.route('/story/new')
 def newStory():
-    return "This page will create a new story."
+    return render_template("newStory.html")
 
 
 # edit story page
 @app.route('/story/<int:story_id>/edit')
 def editStory(story_id):
-    return "This page will edit the story with id: " + str(story_id)
+    return render_template("editStory.html")
 
 
 # delete story page
 @app.route('/story/<int:story_id>/delete')
 def deleteStory(story_id):
-    return "This page will delete the story with id: " + str(story_id)
+    return render_template("deleteStory.html")
 
 
 # if main
