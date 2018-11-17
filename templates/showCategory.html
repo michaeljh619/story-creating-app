@@ -1,7 +1,14 @@
 <html>
 
 <body>
-	<h1>Showing category {{category}}</h1>
+	<h1>{{category.name}} Stories</h1>
+	{% for s in stories %}
+		<a href="{{url_for('showStory', 
+				category_id=category.id,
+				story_id=s.id,
+				page_id=0)}}">{{s.name}}</a>
+		<br/>
+	{% endfor %}
 </body>
 
 </html>

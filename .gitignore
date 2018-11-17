@@ -4,6 +4,7 @@
 *.pyc
 *.pyo
 *.swp
+*.db
 env/
 env*
 dist/
