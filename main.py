@@ -95,20 +95,45 @@ def showStory(category_id, story_id, page_id):
 
 
 # new story page
-@app.route('/categories/<int:category_id>/story/new')
+@app.route('/categories/<int:category_id>/story/new',
+           methods=['GET','POST'])
 def newStory(category_id):
-    return render_template("newStory.html")
+    # start sql session
+    session = create_session()
+    # get category
+    category = session.query(Category).get(category_id)
+    cat_id = category.id
+    if not category:
+        session.close()
+        return None
+    # if submitted form
+    if request.method == 'POST':
+        # create new story
+        story = Story(name=request.form['name'],
+                      description=request.form['description'],
+                      category_id=category.id)
+        session.add(story)
+        # close sql session
+        session.commit()
+        session.close()
+        return redirect(url_for('showCategory',
+                                category_id=cat_id))
+    else:
+        # close sql session
+        session.close()
+        return render_template("newStory.html",
+                               category=category)
 
 
 # edit story page
-@app.route('/story/<int:story_id>/edit')
-def editStory(story_id):
+@app.route('/categories/<int:category_id>/story/<int:story_id>/edit')
+def editStory(category_id, story_id):
     return render_template("editStory.html")
 
 
 # delete story page
-@app.route('/story/<int:story_id>/delete')
-def deleteStory(story_id):
+@app.route('/categories/<int:category_id>/story/<int:story_id>/delete')
+def deleteStory(category_id, story_id):
     return render_template("deleteStory.html")
 
 

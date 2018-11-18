@@ -42,7 +42,7 @@ class Story(Base):
                 primary_key=True)
 
     description = Column(String(250))
-    
+
     category_id = Column(Integer,
                          ForeignKey('category.id'))
     category = relationship(Category)
@@ -54,7 +54,6 @@ class Story(Base):
             'name': self.name,
             'id': self.id,
             'description': self.description,
-            'text': self.text,
             'category': self.category,
         }
 

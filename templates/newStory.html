@@ -2,6 +2,18 @@
 
 <body>
 	<h1>Create a new story</h1>
+
+	<form action="{{url_for('newStory',
+							category_id=category.id)}}" 
+		  method="post">
+		<h2>Story Details</h2>
+		Name:
+		<br/><input type="text" size="30" name="name"><br/>
+		Description:
+		<br/><textarea cols="50" rows="3"
+					   name="description"></textarea><br/>
+		<input type="submit" value="Create">
+	</form>
 </body>
 
 </html>

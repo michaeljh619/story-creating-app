@@ -2,11 +2,26 @@
 
 <body>
 	<h1>{{category.name}} Stories</h1>
-	{% for s in stories %}
+		<a href="{{url_for('newStory', 
+		                   category_id=category.id)}}"
+				>New Story</a>
+		<br/><br/>
+	{% for story in stories %}
 		<a href="{{url_for('showStory', 
 				category_id=category.id,
-				story_id=s.id,
-				page_id=0)}}">{{s.name}}</a>
+				story_id=story.id,
+				page_id=0)}}">{{story.name}}</a>
+		<br/>
+		<a href="{{url_for('editStory', 
+		                   category_id=category.id,
+		   				   story_id=story.id)}}"
+				>Edit Story</a>
+		<br/>
+		<a href="{{url_for('deleteStory', 
+		                   category_id=category.id,
+		   				   story_id=story.id)}}"
+				>Delete Story</a>
+		<br/>
 		<br/>
 	{% endfor %}
 </body>
