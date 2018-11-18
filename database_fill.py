@@ -16,6 +16,7 @@ session = DBSession()
 session.query(Category).delete()
 session.query(Story).delete()
 session.query(Story_Page).delete()
+session.query(Page_Link).delete()
 session.commit()
 
 # create categories
