@@ -60,31 +60,29 @@ def showStory(category_id, story_id, page_id):
         return None
     # get story
     story = session.query(Story).get(story_id)
-    print(str(story_id))
     if not story:
         return None
     # get root page if a page is not specified
     page = None
-    print(str(page_id))
     if page_id == 0:
-        page = session.query(
+        page_query = session.query(
             Story_Page).filter_by(is_root=True,
-                                  story_id=story.id).one()
+                                  story_id=story.id)
+        if page_query.count() > 0:
+            page = page_query.one()
     # page was specified
     else:
         page = session.query(Story_Page).get(page_id)
-    # check page is valid
-    if not page:
-        return None
     # get linked pages
-    page_links = session.query(Page_Link).filter_by(
+    linked_pages = None
+    if page:
+        page_links = session.query(Page_Link).filter_by(
                     base_page_id=page.id).all()
-    linked_pages = []
-    for page_link in page_links:
-        linked_page = session.query(Story_Page).get(
-                        page_link.linked_page_id)
-        linked_pages.append(linked_page)
-        print(linked_page.name)
+        linked_pages = []
+        for page_link in page_links:
+            linked_page = session.query(Story_Page).get(
+                            page_link.linked_page_id)
+            linked_pages.append(linked_page)
     # close sql session
     session.close()
     return render_template("showStory.html",
