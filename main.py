@@ -124,9 +124,31 @@ def newStory(category_id):
 
 
 # edit story page
-@app.route('/categories/<int:category_id>/story/<int:story_id>/edit')
+@app.route('/categories/<int:category_id>/story/<int:story_id>/edit',
+           methods=['GET', 'POST'])
 def editStory(category_id, story_id):
-    return render_template("editStory.html")
+    # start sql session
+    session = create_session()
+    # get category
+    category = session.query(Category).get(category_id)
+    cat_id = category.id
+    # get story
+    story = session.query(Story).get(story_id)
+    if request.method == 'POST':
+        story.name = request.form['name']
+        story.description = request.form['description']
+        session.add(story)
+        session.commit()
+        # close sql session and redirect
+        session.close()
+        return redirect(url_for('showCategory',
+                                category_id=cat_id))
+    else:
+        # close sql session
+        session.close()
+        return render_template("editStory.html",
+                           category=category,
+                           story=story)
 
 
 # delete story page
