@@ -152,9 +152,33 @@ def editStory(category_id, story_id):
 
 
 # delete story page
-@app.route('/categories/<int:category_id>/story/<int:story_id>/delete')
+@app.route('/categories/<int:category_id>/story' 
+           + '/<int:story_id>/delete',
+           methods=['GET', 'POST'])
 def deleteStory(category_id, story_id):
-    return render_template("deleteStory.html")
+    # start sql session
+    session = create_session()
+    # get category
+    category = session.query(Category).get(category_id)
+    cat_id = category.id
+    # get story
+    story = session.query(Story).get(story_id)
+    if request.method == 'POST':
+        # delete story
+        session.delete(story)
+        # delete all pages associated with story
+        # delete all page links associated with story
+        # close session and redirect
+        session.commit()
+        session.close()
+        return redirect(url_for('showCategory',
+                        category_id=category_id))
+    else:
+        # close session
+        session.close()
+        return render_template("deleteStory.html",
+                           story=story,
+                           category=category)
 
 
 # if main

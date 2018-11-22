@@ -1,7 +1,14 @@
 <html>
 
 <body>
-	<h1>Delete Story</h1>
+	<h1>Delete {{story.name}}?</h1>
+
+	<form action="{{url_for('deleteStory',
+							category_id=category.id,
+		  					story_id=story.id)}}" 
+		  method="post">
+		<input type="submit" value="Delete">
+	</form>
 </body>
 
 </html>
