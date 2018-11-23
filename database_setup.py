@@ -69,7 +69,7 @@ class Story_Page(Base):
     description = Column(String(250))
     text = Column(Text())
 
-    # linkage to other pages, can have 6 links
+    # is the root page link
     is_root = Column(Boolean())
 
     # linkage to story
@@ -84,6 +84,12 @@ class Page_Link(Base):
 
     base_page_id = Column(Integer)
     linked_page_id = Column(Integer)
+
+    # linkage to story
+    story_id = Column(Integer,
+                      ForeignKey('story.id'))
+    story = relationship(Story)
+
 
 
 # Sql Database setup footer

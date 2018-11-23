@@ -68,9 +68,11 @@ session.commit()
 
 # create page links
 page1_link_a = Page_Link(base_page_id=story1_page1.id,
-                         linked_page_id=story1_page2a.id)
+                         linked_page_id=story1_page2a.id,
+                         story=story1)
 page1_link_b = Page_Link(base_page_id=story1_page1.id,
-                         linked_page_id=story1_page2b.id)
+                         linked_page_id=story1_page2b.id,
+                         story=story1)
 session.add(page1_link_a)
 session.add(page1_link_b)
 session.commit()

@@ -164,10 +164,15 @@ def deleteStory(category_id, story_id):
     # get story
     story = session.query(Story).get(story_id)
     if request.method == 'POST':
+        # delete all page links associated with story
+        session.query(Page_Link).filter_by(
+                story_id=story.id).delete()
+        # delete all pages associated with story
+        session.query(Story_Page).filter_by(
+                story_id=story.id).delete()
         # delete story
         session.delete(story)
-        # delete all pages associated with story
-        # delete all page links associated with story
+
         # close session and redirect
         session.commit()
         session.close()
