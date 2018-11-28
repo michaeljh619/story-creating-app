@@ -1,0 +1,38 @@
+<html>
+
+<body>
+	{% if linking_page %}
+	<h1>Adding new page linked to page: "{{linking_page.name}}"</h1>
+	{% endif %}
+	{% if not linking_page %}
+	<h1>Creating starting page for story: "{{story.name}}"</h1>
+	{% endif %}
+
+	{% if linking_page %}
+	<form action="{{url_for('addStoryPage',
+							category_id=category.id,
+		  					story_id=story.id,
+		  					linking_page_id=linking_page.id)}}" 
+		  method="post">
+	{% endif %}
+	{% if not linking_page %}
+	<form action="{{url_for('addStoryPage',
+							category_id=category.id,
+		  					story_id=story.id,
+		  					linking_page_id=0)}}" 
+		  method="post">
+	{% endif %}
+		<h2>Page Details</h2>
+		Name:
+		<br/><input type="text" size="30" name="name"><br/>
+		Description:
+		<br/><textarea cols="50" rows="3"
+					   name="description"></textarea><br/>
+		Page Text:
+		<br/><textarea cols="100" rows="10"
+					   name="text"></textarea><br/>
+		<input type="submit" value="Create">
+	</form>
+</body>
+
+</html>

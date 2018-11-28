@@ -92,7 +92,7 @@ def showStory(category_id, story_id, page_id):
                            linked_pages=linked_pages)
 
 
-# new story page
+# new story
 @app.route('/categories/<int:category_id>/story/new',
            methods=['GET','POST'])
 def newStory(category_id):
@@ -123,7 +123,7 @@ def newStory(category_id):
                                category=category)
 
 
-# edit story page
+# edit story
 @app.route('/categories/<int:category_id>/story/<int:story_id>/edit',
            methods=['GET', 'POST'])
 def editStory(category_id, story_id):
@@ -151,7 +151,7 @@ def editStory(category_id, story_id):
                            story=story)
 
 
-# delete story page
+# delete story
 @app.route('/categories/<int:category_id>/story' 
            + '/<int:story_id>/delete',
            methods=['GET', 'POST'])
@@ -184,6 +184,153 @@ def deleteStory(category_id, story_id):
         return render_template("deleteStory.html",
                            story=story,
                            category=category)
+
+
+# pick a page to add a linked page to
+@app.route('/categories/<int:category_id>/story/'
+           + '<int:story_id>/pages')
+def editPages(category_id, story_id):
+    # start an sql session
+    session = create_session()
+    # get category
+    category = session.query(Category).get(category_id)
+    # get story
+    story = session.query(Story).get(story_id)
+    # get list of pages
+    pages = session.query(Story_Page).filter_by(
+                story_id=story.id).all()
+    # close session
+    session.close()
+    if len(pages) == 0:
+        # redirect
+        return redirect(url_for("addStoryPage",
+                                category_id=category_id,
+                                story_id=story_id,
+                                linking_page_id=0))
+    else:
+        return render_template("editPages.html",
+                               story=story,
+                               category=category,
+                               pages=pages)
+
+
+# add story page
+@app.route('/categories/<int:category_id>/story/<int:story_id>'
+           + '/page/add/<int:linking_page_id>',
+           methods=['GET', 'POST'])
+def addStoryPage(category_id, story_id, linking_page_id):
+    # start an sql session
+    session = create_session()
+    # get category
+    category = session.query(Category).get(category_id)
+    # get story
+    story = session.query(Story).get(story_id)
+    # get linking_page
+    linking_page = None
+    if linking_page_id != 0:
+        linking_page = session.query(Story_Page).get(linking_page_id)
+    # post
+    if request.method == 'POST':
+        # check if root
+        is_root = False
+        if linking_page_id == 0:
+            is_root = True
+        # create the page
+        page = Story_Page(name=request.form['name'],
+                          description=request.form['description'],
+                          text=request.form['text'],
+                          is_root=is_root,
+                          story_id=story.id)
+        session.add(page)
+        session.commit()
+        # create a page link if not root
+        if not is_root:
+            page_link = Page_Link(base_page_id=linking_page_id,
+                                  linked_page_id=page.id,
+                                  story_id=story.id)
+            session.add(page_link)
+            session.commit()
+        # close session
+        session.close()
+        return redirect(url_for("editPages",
+                                category_id=category_id,
+                                story_id=story_id))
+    else:
+        session.close()
+        return render_template("newStoryPage.html",
+                               category=category,
+                               story=story,
+                               linking_page=linking_page)
+
+
+# edit story page
+@app.route('/categories/<int:category_id>/story/<int:story_id>'
+           + '/page/edit/<int:page_id>',
+           methods=['GET', 'POST'])
+def editStoryPage(category_id, story_id, page_id):
+    # start an sql session
+    session = create_session()
+    # get category
+    category = session.query(Category).get(category_id)
+    # get story
+    story = session.query(Story).get(story_id)
+    # get page
+    page = session.query(Story_Page).get(page_id)
+    # post
+    if request.method == 'POST':
+        # edit the page
+        page.name = request.form['name']
+        page.description = request.form['description']
+        page.text = request.form['text']
+        # add and commit
+        session.add(page)
+        session.commit()
+        # close session
+        session.close()
+        return redirect(url_for("editPages",
+                                category_id=category_id,
+                                story_id=story_id))
+    else:
+        session.close()
+        return render_template("editStoryPage.html",
+                               category=category,
+                               story=story,
+                               page=page)
+
+
+# delete story page
+@app.route('/categories/<int:category_id>/story/<int:story_id>'
+           + '/page/delete/<int:page_id>',
+           methods=['GET', 'POST'])
+def deleteStoryPage(category_id, story_id, page_id):
+    # start an sql session
+    session = create_session()
+    # get category
+    category = session.query(Category).get(category_id)
+    # get story
+    story = session.query(Story).get(story_id)
+    # get page
+    page = session.query(Story_Page).get(page_id)
+    # post
+    if request.method == 'POST':
+        # delete and commit
+        session.query(Story_Page).filter_by(id=page_id).delete()
+        session.query(Page_Link).filter_by(
+                        linked_page_id=page_id).delete()
+        session.query(Page_Link).filter_by(
+                        base_page_id=page_id).delete()
+        session.commit()
+        # close session
+        session.close()
+        return redirect(url_for("editPages",
+                                category_id=category_id,
+                                story_id=story_id))
+    else:
+        session.close()
+        return render_template("deleteStoryPage.html",
+                               category=category,
+                               story=story,
+                               page=page)
 
 
 # if main
