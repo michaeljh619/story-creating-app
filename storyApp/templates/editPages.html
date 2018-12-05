@@ -1,27 +1,91 @@
 <html>
 
+<head>
+	<style>
+.collapsibleList li{
+  list-style-image : url('button.png');
+  cursor           : auto;
+}
+
+li.collapsibleListOpen{
+  list-style-image : url('button-open.png');
+  cursor           : pointer;
+}
+
+li.collapsibleListClosed{
+  list-style-image : url('button-closed.png');
+  cursor           : pointer;
+}
+	</style>
+</head>
+
 <body>
 	<h1>Showing pages of {{story.name}}</h1>
 
-	{% for page in pages %}
-	{{page.name}}<br/>
+	<ul>
+	{% for page, linked_trees, parent, depth in page_tree recursive %}
+
+	<li>
+	<span>{{ page.name }}</span>
+	- 
 	<a href="{{url_for('addStoryPage',
 					   category_id=category.id,
 					   story_id=story.id,
 					   linking_page_id=page.id)}}"
-	   				>Add linked page</a><br/>
+	   				>Add linked page</a>
+	- 
 	<a href="{{url_for('editStoryPage',
 					   category_id=category.id,
 					   story_id=story.id,
 					   page_id=page.id)}}"
-	   				>Edit this page</a><br/>
+	  				>Edit this page</a>
+	-
 	<a href="{{url_for('deleteStoryPage',
 					   category_id=category.id,
 					   story_id=story.id,
 					   page_id=page.id)}}"
-	   				>Delete this page</a><br/>
-	<br/>
+	   				>Delete this page</a>
+
+	{% if linked_trees|length != 0 %}
+	<ul>
+	{% endif %}
+
+	{{ loop(linked_trees) }}
+
+	{% if linked_trees|length != 0 %}
+	</ul>
+	{% endif %}
+
+	</li>
+
 	{% endfor %}
+	</ul>
+
+	<script>
+		var allSpan = document.getElementsByTagName('span');
+		for(var i = 0; i < allSpan.length; i++)
+		{
+			allSpan[i].onclick=function()
+			{
+				if(this.parentNode)
+				{
+					var childList = this.parentNode.getElementsByTagName('li');
+					for(var j = 0; j < childList.length; j++)
+					{
+						var currentState = childList[j].style.display;
+						if(currentState == "none")
+						{
+							childList[j].style.display = "block";
+						}
+						else
+						{
+							childList[j].style.display = "none";
+						}
+					}
+				}
+			}
+		}
+	</script>
 </body>
 
 </html>
