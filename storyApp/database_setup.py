@@ -85,8 +85,15 @@ class Page_Link(Base):
     __tablename__ = 'page_link'
     id = Column(Integer, primary_key=True)
 
-    base_page_id = Column(Integer)
-    linked_page_id = Column(Integer)
+    # linked page ids
+    base_page_id = Column(Integer, ForeignKey('story_page.id'))
+    linked_page_id = Column(Integer, ForeignKey('story_page.id'))
+
+    # linked pages
+    base_page = relationship(Story_Page, 
+                             foreign_keys=[base_page_id])
+    linked_page = relationship(Story_Page,
+                               foreign_keys=[linked_page_id])
 
     # linkage to story
     story_id = Column(Integer,
@@ -167,11 +174,11 @@ if FILL_DB_WITH_TEST_DATA:
     session.commit()
     
     # create page links
-    page1_link_a = Page_Link(base_page_id=story1_page1.id,
-                            linked_page_id=story1_page2a.id,
+    page1_link_a = Page_Link(base_page=story1_page1,
+                            linked_page=story1_page2a,
                             story=story1)
-    page1_link_b = Page_Link(base_page_id=story1_page1.id,
-                            linked_page_id=story1_page2b.id,
+    page1_link_b = Page_Link(base_page=story1_page1,
+                            linked_page=story1_page2b,
                             story=story1)
     session.add(page1_link_a)
     session.add(page1_link_b)

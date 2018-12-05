@@ -39,15 +39,10 @@ def showStory(category_id, story_id, page_id):
     else:
         page = session.query(Story_Page).get(page_id)
     # get linked pages
-    linked_pages = None
-    if page:
-        page_links = session.query(Page_Link).filter_by(
-                    base_page_id=page.id).all()
-        linked_pages = []
-        for page_link in page_links:
-            linked_page = session.query(Story_Page).get(
-                            page_link.linked_page_id)
-            linked_pages.append(linked_page)
+    linked_pages = session.query(Story_Page).     \
+            filter(Story_Page.id==Page_Link.linked_page_id). \
+            filter(Page_Link.base_page_id==page.id).         \
+            all()
     # close sql session
     session.close()
     return render_template("showStory.html",

@@ -13,7 +13,6 @@
 		<br/>
 		<br/>
 		
-		{% if linked_pages %}
 		{% for linked_page in linked_pages %}
 		<a href="{{url_for('showStory',
 					category_id=category.id,
@@ -22,7 +21,6 @@
 					>{{linked_page.description}}</a>
 		<br/>
 		{% endfor %}
-		{% endif %}
 </body>
 
 </html>

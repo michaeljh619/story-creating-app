@@ -14,32 +14,22 @@ def create_session():
     DBSession = sessionmaker(bind=engine)
     return DBSession()
 
+
 def create_page_tree(page, parent, depth):
     # get all page links
     session = create_session()
-    page_links = session.query(Page_Link).filter_by(
-                base_page_id=page.id).all()
     # get all linked pages
-    linked_pages = []
+    linked_pages = session.query(Story_Page).     \
+            filter(Story_Page.id==Page_Link.linked_page_id). \
+            filter(Page_Link.base_page_id==page.id).         \
+            all()
     linked_pages_trees = []
-    # in a branch (has linked pages)
-    if len(page_links) > 0:
-        # create array of pages
-        for page_link in page_links:
-            # query linked page
-            linked_page = session.query(Story_Page).get(
-                            page_link.linked_page_id)
-            linked_pages.append(linked_page)
-        # close session
-        session.close()
-        # create array of page trees
-        for linked_page in linked_pages:
-            linked_page_tree = create_page_tree(linked_page,
-                                                page, depth+1)
-            linked_pages_trees.append(linked_page_tree)
-    # in a leaf (no linked pages)
-    else:
-        session.close()
+    session.close()
+    # create array of page trees (occurs if not a leaf)
+    for linked_page in linked_pages:
+        linked_page_tree = create_page_tree(linked_page,
+                                            page, depth+1)
+        linked_pages_trees.append(linked_page_tree)
     # return page tree
     return (page, linked_pages_trees, parent, depth)
     
