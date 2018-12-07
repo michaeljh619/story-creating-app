@@ -1,0 +1,62 @@
+/********************************************************************/
+/* Header                                                           */
+/********************************************************************/
+
+#header
+{
+	background: #36486b;
+}
+
+#header h1
+{
+	margin: 0;
+	padding: 0;
+	font-weight: 600;
+}
+
+#header a
+{
+	color: #ffffff;
+	text-decoration:none;
+}
+
+#header a:hover
+{
+	text-decoration: none;
+}
+
+/********************************************************************/
+/* Menu                                                             */
+/********************************************************************/
+#menu
+{
+	position: absolute;
+	right: 0;
+	top: 0.5em;
+	right: 0.5em;
+}
+
+#menu ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menu li
+{
+	float:left;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#menu li:hover
+{
+	background-color:#618685;
+}
+
+#menu a
+{
+	display: block;
+	padding: 0.58em;
+}

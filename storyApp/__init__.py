@@ -11,6 +11,8 @@ from database_setup import Base, Category, Story, Story_Page, Page_Link
 app = Flask(__name__)
 
 # route imports
+import storyApp.route_home
+
 import storyApp.route_showCategories
 import storyApp.route_showCategory
 import storyApp.route_showStory

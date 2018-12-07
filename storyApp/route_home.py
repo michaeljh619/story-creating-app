@@ -14,11 +14,7 @@ def create_session():
     DBSession = sessionmaker(bind=engine)
     return DBSession()
 
-@app.route('/categories/')
-def showCategories():
-    # get categories from database
-    session = create_session()
-    categories = session.query(Category).all()
-    # close database session
-    session.close()
-    return render_template("categories.html", categories=categories)
+# show all stories under a category
+@app.route('/')
+def showHome():
+    return render_template("home.html")
