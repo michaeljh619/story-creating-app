@@ -2,11 +2,6 @@
 /* Header                                                           */
 /********************************************************************/
 
-#header
-{
-	background: #36486b;
-}
-
 #header h1
 {
 	margin: 0;
@@ -48,11 +43,6 @@
 	float:left;
 	text-align: center;
 	text-transform: uppercase;
-}
-
-#menu li:hover
-{
-	background-color:#618685;
 }
 
 #menu a

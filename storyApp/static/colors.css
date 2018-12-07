@@ -1,0 +1,20 @@
+/********************************************************************/
+/* Colors                                                           */
+/********************************************************************/
+
+.color-main
+{
+	background: #008080;
+	background-color: #008080;
+}
+
+.color-secondary
+{
+	background: #66b2b2;
+	background-color: #66b2b2;
+}
+
+.color-hover-highlight li:hover
+{
+	background-color:#618685;
+}

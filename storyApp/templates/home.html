@@ -5,6 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 
+<link href="{{ url_for('static', filename='background.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+<link href="{{ url_for('static', filename='colors.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+
 <link href="{{ url_for('static', filename='header.css') }}" 
 	  rel="stylesheet" type="text/css" media="all"/>
 <link href="{{ url_for('static', filename='banner.css') }}" 
@@ -12,14 +17,14 @@
 </head>
 
 
-<body>
+<body class="color-main">
 
 
 <!--	HEADER AND MENU BAR		-->
-<div id="header">
+<div id="header" class="color-main">
 	<h1><a href="#">StoryApp</a></h1>
 
-	<div id="menu">
+	<div id="menu" class="color-hover-highlight">
 	<ul>
 		<li><a href="#">Home</a></li>
 		<li><a href="#">Read</a></li>
@@ -31,9 +36,13 @@
 
 
 <!--	BANNER		-->
-<div id="banner">
-	<div id="banner-text">
-		<h2>Hi!</h2>
+<div id="banner" 
+	 style="background-image: url({{url_for('static', 
+	 						  filename='images/banner-book.jpg')}})">
+	<div id="banner-text" class="color-secondary">
+		<h2>Embark on an adventure...</h2>
+		<p>Here is some text you will find fascinating.
+		Maybe we can put some featured stories of the month here</p>
 	</div>
 </div>
 
