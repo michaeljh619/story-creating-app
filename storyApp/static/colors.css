@@ -1,20 +1,33 @@
 /********************************************************************/
-/* Colors                                                           */
+/* Main Color                                                       */
 /********************************************************************/
 
 .color-main
 {
-	background: #008080;
-	background-color: #008080;
+	background: #2096BA;
+	background-color: #2096BA;
 }
+
+
+/********************************************************************/
+/* Secondary Color                                                  */
+/********************************************************************/
 
 .color-secondary
 {
-	background: #66b2b2;
-	background-color: #66b2b2;
+	background: #DF6E21;
+	background-color: #DF6E21;
 }
 
+.color-secondary-border
+{
+	border-color: #C5D2DB;
+}
+
+/********************************************************************/
+/* Highlight Color                                                  */
+/********************************************************************/
 .color-hover-highlight li:hover
 {
-	background-color:#618685;
+	background-color:#E7B183;
 }
