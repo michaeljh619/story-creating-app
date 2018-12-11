@@ -2,10 +2,16 @@
 /* Main Color                                                       */
 /********************************************************************/
 
-.color-main
+.color-main-light
 {
-	background: #2096BA;
-	background-color: #2096BA;
+	background: #4484CE;
+	background-color: #4484CE;
+}
+
+.color-main-dark
+{
+	background: #2b62a1;
+	background-color: #2b62a1;
 }
 
 
@@ -13,15 +19,53 @@
 /* Secondary Color                                                  */
 /********************************************************************/
 
-.color-secondary
+.color-secondary-light
 {
-	background: #DF6E21;
-	background-color: #DF6E21;
+	background: #F9CF00;
+	background-color: #F9CF00;
+}
+
+.color-secondary-dark
+{
+	background: #66cc66;
+	background-color: #66cc66;
 }
 
 .color-secondary-border
 {
-	border-color: #C5D2DB;
+	border-color: #grey;
+}
+
+
+/********************************************************************/
+/* Light Background Color                                           */
+/********************************************************************/
+.color-background-light
+{
+	background-color: #F4F4F4;
+}
+
+/********************************************************************/
+/* Font Color                                                       */
+/********************************************************************/
+.color-font-light-1
+{
+	color: #ffffff;
+}
+
+.color-font-light-2
+{
+	color: #ffeecc;
+}
+
+.color-font-dark-1
+{
+	color: #000000;
+}
+
+.color-font-dark-2
+{
+	color: #000000;
 }
 
 /********************************************************************/
@@ -29,5 +73,5 @@
 /********************************************************************/
 .color-hover-highlight li:hover
 {
-	background-color:#E7B183;
+	background-color:#2b62a1;
 }
