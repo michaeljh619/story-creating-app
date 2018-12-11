@@ -16,22 +16,25 @@
 	  rel="stylesheet" type="text/css" media="all"/>
 <link href="{{ url_for('static', filename='content-home.css') }}" 
 	  rel="stylesheet" type="text/css" media="all"/>
+
+<link href="{{ url_for('static', filename='choices.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
 </head>
 
 
-<body class="color-main">
+<body class="color-main-light">
 
 
 <!--	HEADER AND MENU BAR		-->
-<div id="header" class="color-main">
-	<h1><a href="#">StoryApp</a></h1>
+<div id="header" class="color-main-light">
+	<h1><a href="#" class="color-font-light-1">StoryApp</a></h1>
 
 	<div id="menu" class="color-hover-highlight">
 	<ul>
-		<li><a href="#">Home</a></li>
-		<li><a href="#">Read</a></li>
-		<li><a href="#">Write</a></li>
-		<li><a href="#">About</a></li>
+		<li><a href="#" class="color-font-light-1">Home</a></li>
+		<li><a href="#" class="color-font-light-1">Read</a></li>
+		<li><a href="#" class="color-font-light-1">Write</a></li>
+		<li><a href="#" class="color-font-light-1">About</a></li>
 	</ul>
 	</div>
 </div>
@@ -41,9 +44,9 @@
 <div id="banner" 
 	 style="background-image: url({{url_for('static', 
 	 						  filename='images/banner-book.jpg')}})">
-	<div id="banner-text" class="color-secondary">
-		<h2>Embark on an adventure...</h2>
-		<p>Here is some text you will find fascinating.
+	<div id="banner-text" class="color-main-dark">
+		<h2 class="color-font-light-2">Banner Header</h2>
+		<p class="color-font-light-2">Here is some text you will find fascinating.
 		Maybe we can put some featured stories of the month here</p>
 	</div>
 </div>
@@ -51,10 +54,16 @@
 
 <!--	Content		-->
 <div id="content-home"
-	 class="color-secondary-border">
-	<h2>Embark on an Adventure...</h2>
-	<p>&nbsp&nbsp&nbsp&nbspYou stumble across a strange and mysterious website. Your curiousity is piqued by the shades of teal splashing onto your screen, an air of adventure seems to flow about this place. As you read the paragraph before you, a thought enters your mind, "Where is this going?"</p>
+	 class="color-secondary-border color-background-light">
+	<h2 class="color-font-dark-1">Embark on an Adventure...</h2>
+	<p class="color-font-dark-1">&nbsp&nbsp&nbsp&nbspYou stumble across a strange and mysterious website. Your curiousity is piqued by the shades of blue splashing onto your screen, an air of adventure seems to flow about this place. As you read the paragraph before you, a thought enters your mind, "Where is this going?"</p>
 	<p>&nbsp&nbsp&nbsp&nbspBefore you can ponder the subject any longer, you are given an answer in the form of another question: Where do you want this to go? This is the question that all travellers who are fortunate enough to venture into this uncharted territory must answer.</p>
+	<p>&nbsp&nbsp&nbsp&nbspMake your choice:</p>
+
+	<div id="choices-button">
+		<button class="color-secondary-dark">Read a Story</button>
+		<button class="color-secondary-dark">Write a Story</button>
+	</div>
 </div>
 
 </body>

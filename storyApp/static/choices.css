@@ -1,0 +1,28 @@
+/********************************************************************/
+/* Choices                                                          */
+/********************************************************************/
+#choices-button button {
+  border: 0.1em round black; /* Green border */
+  color: white; /* White text */
+  padding: 3em 3em; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  width: 50%;
+  font-size: 1.5em;
+}
+
+#choices-button button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+#choices-button:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+#choices-button button:hover {
+  background-color: #3e8e41;
+}
