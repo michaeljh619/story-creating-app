@@ -7,7 +7,12 @@
 
 <div id="choices-button">
 	{% for c in categories %}
-		<button class="color-secondary-dark">{{c.name}}</button>
+		<form method="get"
+			  action="{{url_for('showCategory', 
+			  					category_id=c.id)}}">
+			<button class="color-secondary-dark"
+					type="submit">{{c.name}}</button>
+		</form>
 	{% endfor %}
 </div>
 

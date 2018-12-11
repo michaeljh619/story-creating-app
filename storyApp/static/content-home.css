@@ -25,3 +25,8 @@
 	padding-right: 2.5em;
 	font-size:2em;
 }
+
+#content-home a:visited
+{
+	color: inherit;
+}
