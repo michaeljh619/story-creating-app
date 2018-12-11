@@ -19,7 +19,11 @@ Embark on an Adventure...
 
 {% block choices %}
 
-<button class="color-secondary-dark">Read a Story</button>
+<form method="get" action="{{url_for('showCategories')}}">
+	<button class="color-secondary-dark"
+			type="submit">Read a Story</button>
+</form>
+
 <button class="color-secondary-dark">Write a Story</button>
 
 {% endblock %}

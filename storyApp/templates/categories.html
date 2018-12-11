@@ -1,12 +1,14 @@
-<html>
+{% extends 'template_site.html' %}
 
-<body>
-	<h1>Listing all categories</h1>
+
+{% block content %}
+
+<h2 class="color-font-dark-2">Story Categories</h1>
+
+<div id="choices-button">
 	{% for c in categories %}
-	<a href="{{url_for('showCategory',
-					   category_id=c.id)}}">{{c.name}}</a>
-	<br/>
+		<button class="color-secondary-dark">{{c.name}}</button>
 	{% endfor %}
-</body>
+</div>
 
-</html>
+{% endblock %}
