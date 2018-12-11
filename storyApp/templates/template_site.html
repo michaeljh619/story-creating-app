@@ -1,0 +1,62 @@
+<!doctype html>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>StoryApp</title>
+
+<link href="{{ url_for('static', filename='background.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+<link href="{{ url_for('static', filename='colors.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+
+<link href="{{ url_for('static', filename='header.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+<link href="{{ url_for('static', filename='banner.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+<link href="{{ url_for('static', filename='content-home.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+
+<link href="{{ url_for('static', filename='choices.css') }}" 
+	  rel="stylesheet" type="text/css" media="all"/>
+</head>
+
+
+<body class="color-main-light">
+
+
+<!--	HEADER AND MENU BAR		-->
+<div id="header" class="color-main-light">
+	<h1><a href="#" class="color-font-light-1">StoryApp</a></h1>
+
+	<div id="menu" class="color-hover-highlight">
+	<ul>
+		<li><a href="#" class="color-font-light-1">Home</a></li>
+		<li><a href="#" class="color-font-light-1">Read</a></li>
+		<li><a href="#" class="color-font-light-1">Write</a></li>
+		<li><a href="#" class="color-font-light-1">About</a></li>
+	</ul>
+	</div>
+</div>
+
+
+<!--	BANNER		-->
+<div id="banner" 
+	 style="background-image: url({{url_for('static', 
+	 						  filename='images/banner-book.jpg')}})">
+	<div id="banner-text" class="color-main-dark">
+		<h2 class="color-font-light-2">Banner Header</h2>
+		<p class="color-font-light-2">Here is some text you will find fascinating.
+		Maybe we can put some featured stories of the month here</p>
+	</div>
+</div>
+
+
+<!--	Content		-->
+<div id="content-home"
+	 class="color-secondary-border color-background-light">
+	{% block content %}
+	{% endblock %}
+</div>
+
+</body>

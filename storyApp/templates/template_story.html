@@ -1,0 +1,16 @@
+{% extends 'template_site.html' %}
+
+
+{% block content %}
+
+<h2 class="color-font-dark-1">
+	{% block content_header %}{% endblock %}
+</h2>
+
+<p class="color-font-dark-1">{% block content_text %}{% endblock %}</p>
+
+<div id="choices-button">
+	{% block choices %}{% endblock %}
+</div>
+
+{% endblock %}
