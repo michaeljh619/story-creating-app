@@ -1,24 +1,23 @@
-<html>
+{% extends 'template_site.html' %}
 
-<body>
-	<h1>Editing page</h1>
-	<form action="{{url_for('editStoryPage',
-							category_id=category.id,
-		  					story_id=story.id,
-		  					page_id=page.id)}}" 
-		  method="post">
-		<h2>Page Details</h2>
-		Name:
-		<br/><input type="text" size="30" name="name"
-					value="{{page.name}}"><br/>
-		Description:
-		<br/><textarea cols="50" rows="3"
-					   name="description">{{page.description}}</textarea><br/>
-		Page Text:
-		<br/><textarea cols="100" rows="10"
-					   name="text">{{page.text}}</textarea><br/>
-		<input type="submit" value="Create">
-	</form>
-</body>
+{% block content %}
 
-</html>
+<h2>Editing Page</h2>
+<form action="{{url_for('editStoryPage',
+						category_id=category.id,
+		  				story_id=story.id,
+		  				page_id=page.id)}}" 
+		 method="post">
+	Name:
+	<br/><input type="text" size="30" name="name"
+				value="{{page.name}}"><br/>
+	Description:
+	<br/><textarea cols="50" rows="3"
+					  name="description">{{page.description}}</textarea><br/>
+	Page Text:
+	<br/><textarea cols="100" rows="10"
+					  name="text">{{page.text}}</textarea><br/>
+	<input type="submit" value="Create">
+</form>
+
+{% endblock %}

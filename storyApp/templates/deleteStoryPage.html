@@ -1,15 +1,15 @@
-<html>
+{% extends 'template_site.html' %}
 
-<body>
-	<h1>Delete page: "{{page.name}}"?</h1>
+{% block content %}
 
-	<form action="{{url_for('deleteStoryPage',
-							category_id=category.id,
-		  					story_id=story.id,
-		  					page_id=page.id)}}" 
-		  method="post">
-		<input type="submit" value="Delete">
-	</form>
-</body>
+<h1>Delete page: "{{page.name}}"?</h1>
 
-</html>
+<form action="{{url_for('deleteStoryPage',
+						category_id=category.id,
+		  				story_id=story.id,
+		  				page_id=page.id)}}" 
+		 method="post">
+	<input type="submit" value="Delete">
+</form>
+
+{% endblock %}
