@@ -1,14 +1,14 @@
-<html>
+{% extends 'template_site.html' %}
 
-<body>
-	<h1>Delete {{story.name}}?</h1>
+{% block content %}
 
-	<form action="{{url_for('deleteStory',
-							category_id=category.id,
-		  					story_id=story.id)}}" 
-		  method="post">
-		<input type="submit" value="Delete">
-	</form>
-</body>
+<h1>Delete {{story.name}}?</h1>
 
-</html>
+<form action="{{url_for('deleteStory',
+						category_id=category.id,
+		  				story_id=story.id)}}" 
+		 method="post">
+	<input type="submit" value="Delete">
+</form>
+
+{% endblock %}
