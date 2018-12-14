@@ -1,91 +1,71 @@
-<html>
+{% extends 'template_site.html' %}
 
-<head>
-	<style>
-.collapsibleList li{
-  list-style-image : url('button.png');
-  cursor           : auto;
-}
+{% block head %}
+<link href="{{ url_for('static', filename='collapsible-list.css') }}"
+      rel="stylesheet" type="text/css" media="all"/>
+{% endblock %}
 
-li.collapsibleListOpen{
-  list-style-image : url('button-open.png');
-  cursor           : pointer;
-}
+{% block content %}
+<h2>
+Showing pages of {{story.name}}
+</h2>
 
-li.collapsibleListClosed{
-  list-style-image : url('button-closed.png');
-  cursor           : pointer;
-}
-	</style>
-</head>
-
-<body>
-	<h1>Showing pages of {{story.name}}</h1>
-
-	<ul>
-	{% for page, linked_trees, parent, depth in page_tree recursive %}
-
-	<li>
-	<span>{{ page.name }}</span>
-	- 
-	<a href="{{url_for('addStoryPage',
-					   category_id=category.id,
-					   story_id=story.id,
-					   linking_page_id=page.id)}}"
-	   				>Add linked page</a>
-	- 
-	<a href="{{url_for('editStoryPage',
-					   category_id=category.id,
-					   story_id=story.id,
-					   page_id=page.id)}}"
-	  				>Edit this page</a>
-	-
-	<a href="{{url_for('deleteStoryPage',
-					   category_id=category.id,
-					   story_id=story.id,
-					   page_id=page.id)}}"
-	   				>Delete this page</a>
-
-	{% if linked_trees|length != 0 %}
-	<ul>
-	{% endif %}
-
-	{{ loop(linked_trees) }}
-
-	{% if linked_trees|length != 0 %}
-	</ul>
-	{% endif %}
-
-	</li>
-
-	{% endfor %}
-	</ul>
-
-	<script>
-		var allSpan = document.getElementsByTagName('span');
-		for(var i = 0; i < allSpan.length; i++)
+<ul>
+{% for page, linked_trees, parent, depth in page_tree recursive %}
+<li>
+<span>{{ page.name }}</span>
+- 
+<a href="{{url_for('addStoryPage',
+					  category_id=category.id,
+					  story_id=story.id,
+					  linking_page_id=page.id)}}"
+	   			>Add linked page</a>
+- 
+<a href="{{url_for('editStoryPage',
+					  category_id=category.id,
+					  story_id=story.id,
+					  page_id=page.id)}}"
+	  			>Edit this page</a>
+-
+<a href="{{url_for('deleteStoryPage',
+					  category_id=category.id,
+					  story_id=story.id,
+					  page_id=page.id)}}"
+	   			>Delete this page</a>
+{% if linked_trees|length != 0 %}
+<ul>
+{% endif %}
+{{ loop(linked_trees) }}
+{% if linked_trees|length != 0 %}
+</ul>
+{% endif %}
+</li>
+{% endfor %}
+</ul>
+<script>
+	var allSpan = document.getElementsByTagName('span');
+	for(var i = 0; i < allSpan.length; i++)
+	{
+		allSpan[i].onclick=function()
 		{
-			allSpan[i].onclick=function()
+			if(this.parentNode)
 			{
-				if(this.parentNode)
+				var childList = this.parentNode.getElementsByTagName('li');
+				for(var j = 0; j < childList.length; j++)
 				{
-					var childList = this.parentNode.getElementsByTagName('li');
-					for(var j = 0; j < childList.length; j++)
+					var currentState = childList[j].style.display;
+					if(currentState == "none")
 					{
-						var currentState = childList[j].style.display;
-						if(currentState == "none")
-						{
-							childList[j].style.display = "block";
-						}
-						else
-						{
-							childList[j].style.display = "none";
-						}
+						childList[j].style.display = "block";
+					}
+					else
+					{
+						childList[j].style.display = "none";
 					}
 				}
 			}
 		}
-	</script>
-</body>
+	}
+</script>
 
-</html>
+{% endblock %}
