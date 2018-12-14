@@ -1,19 +1,24 @@
-<html>
+{% extends 'template_site.html' %}
 
-<body>
-	<h1>Create a new story</h1>
+{% block content %}
 
-	<form action="{{url_for('newStory',
-							category_id=category.id)}}" 
-		  method="post">
-		<h2>Story Details</h2>
-		Name:
-		<br/><input type="text" size="30" name="name"><br/>
-		Description:
-		<br/><textarea cols="50" rows="3"
-					   name="description"></textarea><br/>
-		<input type="submit" value="Create">
-	</form>
-</body>
+<h1>Create a new story</h1>
 
-</html>
+<form action="{{url_for('newStory')}}" 
+		 method="post">
+	<h2>Story Details</h2>
+	Name:
+	<br/><input type="text" size="30" name="name"><br/>
+	Category:
+	<br/><select name="category">
+		{% for category in categories %}
+		<option value="{{category.id}}">{{category.name}}</option>
+		{% endfor %}
+	</select><br/>
+	Description:
+	<br/><textarea cols="50" rows="3"
+					  name="description"></textarea><br/>
+	<input type="submit" value="Create">
+</form>
+
+{% endblock %}

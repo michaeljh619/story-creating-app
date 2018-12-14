@@ -24,6 +24,9 @@ Embark on an Adventure...
 			type="submit">Read a Story</button>
 </form>
 
-<button class="color-secondary-dark">Write a Story</button>
+<form method="get" action="{{url_for('newStory')}}">
+	<button class="color-secondary-dark"
+			type="submit">Write a Story</button>
+</form>
 
 {% endblock %}

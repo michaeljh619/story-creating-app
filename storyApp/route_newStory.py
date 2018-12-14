@@ -15,31 +15,29 @@ def create_session():
     return DBSession()
 
 # new story
-@app.route('/categories/<int:category_id>/story/new',
+@app.route('/categories/story/new',
            methods=['GET','POST'])
-def newStory(category_id):
+def newStory():
     # start sql session
     session = create_session()
-    # get category
-    category = session.query(Category).get(category_id)
-    cat_id = category.id
-    if not category:
-        session.close()
-        return None
+    # get categories
+    categories = session.query(Category).all()
     # if submitted form
     if request.method == 'POST':
+        # get category that the story is being posted to
+        category_id= request.form['category']
         # create new story
         story = Story(name=request.form['name'],
                       description=request.form['description'],
-                      category_id=category.id)
+                      category_id=category_id)
         session.add(story)
         # close sql session
         session.commit()
         session.close()
         return redirect(url_for('showCategory',
-                                category_id=cat_id))
+                                category_id=category_id))
     else:
         # close sql session
         session.close()
-        return render_template("newStory.html",
-                               category=category)
+        return render_template("newStory.html", 
+                               categories=categories)
