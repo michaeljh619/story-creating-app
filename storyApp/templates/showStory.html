@@ -1,26 +1,30 @@
-<html>
+{% extends 'template_story.html' %}
 
-<body>
-		<h1>{{story.name}}</h1>
-		{% if page %}
-		<p>{{page.text}}</p>
-		{% endif %}
+{% block content_header %}
+{{ story.name }}
+{% endblock %}
 
-		{% if not page %}
-		<p>There are currently no pages written in this story!</p>
-		{% endif %}
 
-		<br/>
-		<br/>
-		
-		{% for linked_page in linked_pages %}
-		<a href="{{url_for('showStory',
-					category_id=category.id,
-					story_id=story.id,
-					page_id=linked_page.id)}}"
-					>{{linked_page.description}}</a>
-		<br/>
-		{% endfor %}
-</body>
+{% block content_text %}
+{% if page %}
+<p>{{page.text}}</p>
+{% endif %}
 
-</html>
+
+{% if not page %}
+<p>There are currently no pages written in this story!</p>
+{% endif %}
+{% endblock %}
+
+
+{% block choices %}
+{% for linked_page in linked_pages %}
+	<form method="get" action="{{url_for('showStory',
+									 category_id=category.id,
+									 story_id=story.id,
+									 page_id=linked_page.id)}}">
+		<button class="color-secondary-dark"
+				type="submit">{{linked_page.description}}</button>
+	</form>
+{% endfor %}
+{% endblock %}

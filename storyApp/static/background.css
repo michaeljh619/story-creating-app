@@ -7,3 +7,15 @@ html, body
 	height: 100%;
 }
 
+body
+{
+	margin-right: auto;
+	margin-left: auto;
+	position: center;
+
+	padding-right: 3em;
+	padding-left: 3em;
+
+	max-width: 70em;
+	min-width: 50em;
+}
