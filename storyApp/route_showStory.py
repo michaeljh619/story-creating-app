@@ -39,7 +39,9 @@ def showStory(category_id, story_id, page_id):
     else:
         page = session.query(Story_Page).get(page_id)
     # get linked pages
-    linked_pages = session.query(Story_Page).     \
+    linked_pages = []
+    if page:
+        linked_pages = session.query(Story_Page).     \
             filter(Story_Page.id==Page_Link.linked_page_id). \
             filter(Page_Link.base_page_id==page.id).         \
             all()
