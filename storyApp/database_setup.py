@@ -101,6 +101,19 @@ class Page_Link(Base):
     story = relationship(Story)
 
 
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+
+    # user info
+    email = Column(String(100), unique=True, nullable=False)
+    name = Column(String(100), nullable=True)
+    avatar = Column(String(200))
+    
+    # login
+    active = Column(Boolean, default=False)
+    tokens = Column(Text)
+
 
 # Sql Database setup footer
 engine = create_engine(
