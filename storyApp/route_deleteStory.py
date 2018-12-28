@@ -7,6 +7,7 @@ from database_setup import Base, Category, Story
 from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
+from google_helper import get_user
 
 # delete story
 @app.route('/categories/<int:category_id>/story' 
@@ -39,6 +40,8 @@ def deleteStory(category_id, story_id):
     else:
         # close session
         session.close()
+        user = get_user()
         return render_template("deleteStory.html",
                            story=story,
-                           category=category)
+                           category=category,
+                           user=user)

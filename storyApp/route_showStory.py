@@ -7,6 +7,7 @@ from database_setup import Base, Category, Story
 from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
+from google_helper import get_user
 
 # show a particular story in a category
 @app.route('/categories/<int:category_id>/story/<int:story_id>/page/<int:page_id>')
@@ -41,8 +42,11 @@ def showStory(category_id, story_id, page_id):
             all()
     # close sql session
     session.close()
+    # get user
+    user = get_user()
     return render_template("showStory.html",
                            category=category,
                            story=story,
                            page=page,
-                           linked_pages=linked_pages)
+                           linked_pages=linked_pages,
+                           user=user)

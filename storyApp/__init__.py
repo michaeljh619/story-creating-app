@@ -45,9 +45,9 @@ import storyApp.route_addPage
 import storyApp.route_editPage
 import storyApp.route_deletePage
 import storyApp.route_login
+import storyApp.route_logout
 import storyApp.route_authorized
 
-from google_oauth import GoogleAuth
 
 
 # function to create app

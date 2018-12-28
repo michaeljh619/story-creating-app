@@ -7,6 +7,7 @@ from database_setup import Base, Category, Story
 from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
+from google_helper import get_user
 
 # edit story page
 @app.route('/categories/<int:category_id>/story/<int:story_id>'
@@ -37,7 +38,9 @@ def editStoryPage(category_id, story_id, page_id):
                                 story_id=story_id))
     else:
         session.close()
+        user = get_user()
         return render_template("editStoryPage.html",
                                category=category,
                                story=story,
-                               page=page)
+                               page=page,
+                               user=user)

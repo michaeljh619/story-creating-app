@@ -7,6 +7,7 @@ from database_setup import Base, Category, Story
 from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
+from google_helper import get_user
 
 def create_page_tree(page, parent, depth):
     # get all page links
@@ -57,7 +58,9 @@ def editPages(category_id, story_id):
         session.close()
         # create page tree
         page_tree = [create_page_tree(root_page, None, 0)]
+        user = get_user()
         return render_template("editPages.html",
                                story=story,
                                category=category,
-                               page_tree=page_tree)
+                               page_tree=page_tree,
+                               user=user)

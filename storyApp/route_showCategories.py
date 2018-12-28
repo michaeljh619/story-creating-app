@@ -7,6 +7,7 @@ from database_setup import Base, Category, Story
 from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
+from google_helper import get_user
 
 @app.route('/categories/')
 def showCategories():
@@ -15,4 +16,8 @@ def showCategories():
     categories = session.query(Category).all()
     # close database session
     session.close()
-    return render_template("categories.html", categories=categories)
+    # get user if logged in
+    user = get_user()
+    return render_template("categories.html",
+                           categories=categories,
+                           user=user)

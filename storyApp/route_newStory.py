@@ -7,6 +7,7 @@ from database_setup import Base, Category, Story
 from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
+from google_helper import get_user
 
 # new story
 @app.route('/categories/story/new',
@@ -33,5 +34,7 @@ def newStory():
     else:
         # close sql session
         session.close()
+        user = get_user()
         return render_template("newStory.html", 
-                               categories=categories)
+                               categories=categories,
+                               user=user)
