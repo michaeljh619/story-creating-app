@@ -38,6 +38,7 @@
 
 	<div id="menu" class="color-hover-highlight">
 	<ul>
+		<!-- Page links -->
 		<li><a href="{{url_for('showHome')}}" 
 			   class="color-font-light-1">
 			Home</a>
@@ -49,6 +50,27 @@
 		<li><a href="{{url_for('newStory')}}" 
 			   class="color-font-light-1">Write</a></li>
 		<li><a href="#" class="color-font-light-1">About</a></li>
+
+		<!-- Login -->
+		{% if user == None %}
+		<li class="login"><a href="{{url_for('login')}}"
+			   class="color-font-light-2">Login
+			<img src="{{url_for('static',
+								filename='images/no-profile.png')}}"
+				 class="login"
+				 >
+			</a>
+		</li>
+		{% endif %}
+		{% if user %}
+		<li class="login"><a href="{{url_for('login')}}"
+							 class="color-font-light-2">{{user.name}}
+							 <img src="{{user.avatar}}"
+				 				  class="login">
+			</a>
+		</li>
+		{% endif %}
+
 	</ul>
 	</div>
 </div>
