@@ -46,6 +46,7 @@ import storyApp.route_editPage
 import storyApp.route_deletePage
 import storyApp.route_login
 import storyApp.route_logout
+import storyApp.route_profile
 import storyApp.route_authorized
 
 
