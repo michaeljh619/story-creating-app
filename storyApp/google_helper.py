@@ -13,7 +13,10 @@ def get_user():
     if 'google_token' in session:
         g_user = google.get('userinfo')
         db_session = create_session()
-        user = db_session.query(User).filter_by(
-                email=g_user.data['email']).one()
+        try:
+            user = db_session.query(User).filter_by(
+                   email=g_user.data['email']).one()
+        except KeyError, e:
+            print('User is not logged in')
         db_session.close()
     return user
