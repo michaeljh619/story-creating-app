@@ -8,8 +8,9 @@ from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
 from google_helper import get_user
+import routes
 
-@app.route('/categories/')
+@app.route(routes.ROUTES['showCategories_route'])
 def showCategories():
     # get categories from database
     session = create_session()

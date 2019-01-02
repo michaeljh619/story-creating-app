@@ -8,9 +8,10 @@ from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
 from google_helper import get_user
+import routes
 
 # show all stories under a category
-@app.route('/categories/<int:category_id>/')
+@app.route(routes.ROUTES['showCategory_route'])
 def showCategory(category_id):
     # start sql session
     session = create_session()

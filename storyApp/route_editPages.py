@@ -8,6 +8,7 @@ from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
 from google_helper import get_user
+import routes
 
 def create_page_tree(page, parent, depth):
     # get all page links
@@ -29,8 +30,7 @@ def create_page_tree(page, parent, depth):
     
 
 # pick a page to add a linked page to
-@app.route('/categories/<int:category_id>/story/'
-           + '<int:story_id>/pages')
+@app.route(routes.ROUTES['editPages_route'])
 def editPages(category_id, story_id):
     # start an sql session
     session = create_session()

@@ -7,6 +7,7 @@ from database_setup import Base, Category, Story
 from database_setup import Story_Page, Page_Link, User
 from storyApp import app, google
 from db_session import create_session
+import routes
 
 def create_new_user(g_user, db_session):
     user = User(email=g_user.data['email'], 
@@ -17,7 +18,7 @@ def create_new_user(g_user, db_session):
     return None
 
 # show all stories under a category
-@app.route('/authorized')
+@app.route(routes.ROUTES['authorized_route'])
 def authorized():
     resp = google.authorized_response()
     if resp is None:

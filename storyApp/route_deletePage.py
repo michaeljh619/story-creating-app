@@ -8,10 +8,10 @@ from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
 from google_helper import get_user
+import routes
 
 # delete story page
-@app.route('/categories/<int:category_id>/story/<int:story_id>'
-           + '/page/delete/<int:page_id>',
+@app.route(routes.ROUTES['deleteStoryPage_route'],
            methods=['GET', 'POST'])
 def deleteStoryPage(category_id, story_id, page_id):
     # start an sql session

@@ -8,9 +8,10 @@ from database_setup import Story_Page, Page_Link
 from storyApp import app
 from db_session import create_session
 from google_helper import get_user
+import routes
 
 # edit story
-@app.route('/categories/<int:category_id>/story/<int:story_id>/edit',
+@app.route(routes.ROUTES['editStory_route'],
            methods=['GET', 'POST'])
 def editStory(category_id, story_id):
     # start sql session
