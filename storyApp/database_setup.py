@@ -21,6 +21,20 @@ FILL_DB_WITH_TEST_DATA = False
 Base = declarative_base()
 
 
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+
+    # user info
+    email = Column(String(100), unique=True, nullable=False)
+    name = Column(String(100), nullable=True)
+    avatar = Column(String(200))
+    
+    # login
+    active = Column(Boolean, default=False)
+    tokens = Column(Text)
+
+
 # Create Restaurant Class (table)
 class Category(Base):
     __tablename__ = 'category'
@@ -49,6 +63,10 @@ class Story(Base):
     category_id = Column(Integer,
                          ForeignKey('category.id'))
     category = relationship(Category)
+
+    owner_id = Column(Integer,
+                     ForeignKey('user.id'))
+    owner = relationship(User)
 
     @property
     def serialize(self):
@@ -101,20 +119,6 @@ class Page_Link(Base):
     story = relationship(Story)
 
 
-class User(Base):
-    __tablename__ = 'user'
-    id = Column(Integer, primary_key=True)
-
-    # user info
-    email = Column(String(100), unique=True, nullable=False)
-    name = Column(String(100), nullable=True)
-    avatar = Column(String(200))
-    
-    # login
-    active = Column(Boolean, default=False)
-    tokens = Column(Text)
-
-
 # Sql Database setup footer
 engine = create_engine(
     'sqlite:///stories.db')
@@ -137,6 +141,7 @@ if FILL_DB_WITH_TEST_DATA:
     session.query(Story).delete()
     session.query(Story_Page).delete()
     session.query(Page_Link).delete()
+    session.query(User).delete()
     session.commit()
     
     # create categories
@@ -147,6 +152,7 @@ if FILL_DB_WITH_TEST_DATA:
         session.add(c)
         session.commit()
     
+    '''
     # create stories
     story1 = Story(name="Action Jack",
                 description="Explosions, car chases, and action!",
@@ -196,6 +202,6 @@ if FILL_DB_WITH_TEST_DATA:
     session.add(page1_link_a)
     session.add(page1_link_b)
     session.commit()
-    
+    '''
     # close database
     session.close()

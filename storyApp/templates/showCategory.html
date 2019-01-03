@@ -15,6 +15,7 @@
 			category_id=category.id,
 			story_id=story.id,
 			page_id=0)}}">{{story.name}}</a>
+	{% if story.owner_id == user.id %}
 	<br/>
 	<a href="{{url_for('editStory', 
 		                  category_id=category.id,
@@ -30,9 +31,11 @@
 		                  category_id=category.id,
 		   				  story_id=story.id)}}"
 			>Edit Pages</a>
+	{% endif %}
 	<br/>
 	<br/>
 {% endfor %}
+
 	</p>
 
 {% endblock %}

@@ -14,6 +14,7 @@ import routes
 @app.route(routes.ROUTES['deleteStoryPage_route'],
            methods=['GET', 'POST'])
 def deleteStoryPage(category_id, story_id, page_id):
+    user = get_user()
     # start an sql session
     session = create_session()
     # get category
@@ -22,6 +23,12 @@ def deleteStoryPage(category_id, story_id, page_id):
     story = session.query(Story).get(story_id)
     # get page
     page = session.query(Story_Page).get(page_id)
+    # Protect this page by login
+    if user == None:
+        return redirect(url_for("login"))
+    owner = story.owner
+    if user.id != owner.id:
+        return abort(401)
     # post
     if request.method == 'POST':
         # delete and commit
@@ -38,7 +45,6 @@ def deleteStoryPage(category_id, story_id, page_id):
                                 story_id=story_id))
     else:
         session.close()
-        user = get_user()
         return render_template("deleteStoryPage.html",
                                category=category,
                                story=story,

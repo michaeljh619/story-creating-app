@@ -14,10 +14,14 @@ import routes
 @app.route(routes.ROUTES['newStory_route'],
            methods=['GET','POST'])
 def newStory():
+    user = get_user()
     # start sql session
     session = create_session()
     # get categories
     categories = session.query(Category).all()
+    # Protect this page by login
+    if user == None:
+        return redirect(url_for("login"))
     # if submitted form
     if request.method == 'POST':
         # get category that the story is being posted to
@@ -25,7 +29,8 @@ def newStory():
         # create new story
         story = Story(name=request.form['name'],
                       description=request.form['description'],
-                      category_id=category_id)
+                      category_id=category_id,
+                      owner_id=user.id)
         session.add(story)
         # close sql session
         session.commit()
@@ -35,7 +40,6 @@ def newStory():
     else:
         # close sql session
         session.close()
-        user = get_user()
         return render_template("newStory.html", 
                                categories=categories,
                                user=user)

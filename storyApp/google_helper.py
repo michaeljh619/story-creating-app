@@ -15,7 +15,7 @@ def get_user():
         db_session = create_session()
         try:
             user = db_session.query(User).filter_by(
-                   email=g_user.data['email']).one()
+                   email=g_user.data['email']).first()
         except KeyError, e:
             print('User is not logged in')
         db_session.close()

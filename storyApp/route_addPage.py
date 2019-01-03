@@ -1,5 +1,5 @@
 # imports
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from flask import redirect, url_for, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -14,12 +14,19 @@ import routes
 @app.route(routes.ROUTES['addStoryPage_route'],
            methods=['GET', 'POST'])
 def addStoryPage(category_id, story_id, linking_page_id):
+    user = get_user()
     # start an sql session
     session = create_session()
     # get category
     category = session.query(Category).get(category_id)
     # get story
     story = session.query(Story).get(story_id)
+    # Protect this page by login
+    if user == None:
+        return redirect(url_for("login"))
+    owner = story.owner
+    if user.id != owner.id:
+        return abort(401)
     # get linking_page
     linking_page = None
     if linking_page_id != 0:
@@ -52,7 +59,6 @@ def addStoryPage(category_id, story_id, linking_page_id):
                                 story_id=story_id))
     else:
         session.close()
-        user = get_user()
         return render_template("newStoryPage.html",
                                category=category,
                                story=story,
