@@ -47,6 +47,7 @@ class Category(Base):
     def serialize(self):
         return{
             'name': self.name,
+            'id': self.id,
         }
 
 
@@ -75,7 +76,6 @@ class Story(Base):
             'name': self.name,
             'id': self.id,
             'description': self.description,
-            'category': self.category,
         }
 
 
@@ -97,6 +97,17 @@ class Story_Page(Base):
     story_id = Column(Integer,
                       ForeignKey('story.id'))
     story = relationship(Story)
+
+    @property
+    def serialize(self):
+        # returns object data in serializeable format
+        return{
+            'name': self.name,
+            'id': self.id,
+            'description': self.description,
+            'text': self.text,
+            'is_root': self.is_root,
+        }
 
 
 class Page_Link(Base):

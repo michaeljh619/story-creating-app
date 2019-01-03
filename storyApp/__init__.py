@@ -49,6 +49,11 @@ import storyApp.route_logout
 import storyApp.route_profile
 import storyApp.route_authorized
 
+import storyApp.json_showCategories
+import storyApp.json_showCategory
+import storyApp.json_showStory
+import storyApp.json_showPage
+
 
 
 # function to create app

@@ -26,8 +26,16 @@ ROUTES = {
 
 "showCategories_route": '/categories/',
 
+"showCategoriesJSON_route": '/categories/json',
+
 "showCategory_route": '/categories/<int:category_id>/',
 
-"showStory_route": '/categories/<int:category_id>/story/<int:story_id>/page/<int:page_id>'
+"showCategoryJSON_route": '/categories/<int:category_id>/json',
+
+"showPageJSON_route": '/categories/<int:category_id>/story/<int:story_id>/page/<int:page_id>/json',
+
+"showStory_route": '/categories/<int:category_id>/story/<int:story_id>/page/<int:page_id>',
+
+"showStoryJSON_route": '/categories/<int:category_id>/story/<int:story_id>/json'
 
 }
